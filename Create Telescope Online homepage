@@ -1,0 +1,722 @@
+```html
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Telescope Online | Global Education & Science</title>
+
+  <meta name="description"
+        content="Telescope Online — global education, science, mathematics, physics, chemistry, biology and computer science platform.">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #050816;
+      color: #ffffff;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1180px, 92%);
+      margin: auto;
+    }
+
+    /* HEADER */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(5, 8, 22, 0.94);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .navbar {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 22px;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .logo-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #36d1ff, #725cff);
+      box-shadow: 0 0 25px rgba(54,209,255,0.35);
+      font-size: 22px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    nav a {
+      color: #c9d2e8;
+      font-size: 14px;
+      transition: .2s;
+    }
+
+    nav a:hover {
+      color: #36d1ff;
+    }
+
+    .language {
+      background: #10172d;
+      color: white;
+      border: 1px solid #263354;
+      border-radius: 8px;
+      padding: 9px;
+    }
+
+    .login {
+      border: 1px solid #36d1ff;
+      padding: 9px 16px;
+      border-radius: 8px;
+      color: #36d1ff;
+    }
+
+    /* HERO */
+
+    .hero {
+      min-height: 690px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(54,209,255,.16), transparent 30%),
+        radial-gradient(circle at 80% 20%, rgba(114,92,255,.18), transparent 30%),
+        #050816;
+    }
+
+    .stars {
+      position: absolute;
+      inset: 0;
+      opacity: .35;
+      background-image:
+        radial-gradient(#ffffff 1px, transparent 1px);
+      background-size: 70px 70px;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 760px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 7px 13px;
+      border-radius: 50px;
+      background: rgba(54,209,255,.1);
+      border: 1px solid rgba(54,209,255,.35);
+      color: #5bdcff;
+      font-size: 13px;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      font-size: clamp(42px, 7vw, 78px);
+      line-height: 1.02;
+      margin-bottom: 25px;
+    }
+
+    .gradient {
+      background: linear-gradient(90deg, #38d8ff, #8b70ff, #ff68d1);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      color: #aeb9d2;
+      font-size: 19px;
+      max-width: 700px;
+      margin-bottom: 32px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 14px 24px;
+      border-radius: 10px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #36d1ff, #725cff);
+      color: white;
+      box-shadow: 0 10px 30px rgba(54,209,255,.2);
+    }
+
+    .btn-secondary {
+      border: 1px solid #33405f;
+      background: #0c1227;
+      color: white;
+    }
+
+    /* SUBJECTS */
+
+    section {
+      padding: 85px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+
+    .section-title h2 {
+      font-size: 38px;
+      margin-bottom: 10px;
+    }
+
+    .section-title p {
+      color: #8995b0;
+    }
+
+    .subjects {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 18px;
+    }
+
+    .subject {
+      background: linear-gradient(145deg, #101831, #080d20);
+      border: 1px solid #1c2948;
+      border-radius: 16px;
+      padding: 28px 18px;
+      text-align: center;
+      transition: .25s;
+    }
+
+    .subject:hover {
+      transform: translateY(-6px);
+      border-color: #36d1ff;
+      box-shadow: 0 15px 35px rgba(0,0,0,.3);
+    }
+
+    .subject-icon {
+      font-size: 38px;
+      margin-bottom: 12px;
+    }
+
+    .subject h3 {
+      font-size: 17px;
+      margin-bottom: 5px;
+    }
+
+    .subject p {
+      color: #7885a3;
+      font-size: 13px;
+    }
+
+    /* PROGRAMS */
+
+    .programs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .program {
+      padding: 28px;
+      background: #0d142b;
+      border: 1px solid #1c2948;
+      border-radius: 15px;
+    }
+
+    .program h3 {
+      margin-bottom: 8px;
+    }
+
+    .program p {
+      color: #8995b0;
+      font-size: 14px;
+    }
+
+    /* SCIENCE */
+
+    .science {
+      background:
+        linear-gradient(120deg, rgba(30,47,100,.4), rgba(9,12,29,.7));
+    }
+
+    .science-box {
+      border: 1px solid #27365e;
+      border-radius: 22px;
+      padding: 50px;
+      background: rgba(8,13,32,.75);
+      text-align: center;
+    }
+
+    .science-box h2 {
+      font-size: 40px;
+      margin-bottom: 15px;
+    }
+
+    .science-box p {
+      max-width: 800px;
+      margin: auto;
+      color: #a3afc9;
+    }
+
+    /* FEATURES */
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .feature {
+      padding: 28px;
+      border-radius: 15px;
+      background: #0c1328;
+      border: 1px solid #1c2948;
+    }
+
+    .feature h3 {
+      margin-bottom: 10px;
+    }
+
+    .feature p {
+      color: #8995b0;
+      font-size: 14px;
+    }
+
+    /* FOOTER */
+
+    footer {
+      border-top: 1px solid #18223c;
+      padding: 35px 0;
+      color: #7885a3;
+      text-align: center;
+      background: #030611;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 900px) {
+
+      nav {
+        display: none;
+      }
+
+      .subjects {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .programs {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: 620px;
+      }
+
+      .science-box {
+        padding: 30px 20px;
+      }
+    }
+
+    @media (max-width: 520px) {
+
+      .subjects {
+        grid-template-columns: 1fr;
+      }
+
+      .programs {
+        grid-template-columns: 1fr;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      section {
+        padding: 60px 0;
+      }
+
+      .logo span {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="container navbar">
+
+    <a href="#" class="logo">
+      <div class="logo-icon">🔭</div>
+      <span>TELESCOPE ONLINE</span>
+    </a>
+
+    <nav>
+      <a href="#subjects">Subjects</a>
+      <a href="#programs">Programs</a>
+      <a href="#science">Global Science</a>
+      <a href="#olympiad">Olympiad</a>
+    </nav>
+
+    <select class="language" id="language">
+      <option value="az">AZ</option>
+      <option value="en">EN</option>
+      <option value="tr">TR</option>
+      <option value="de">DE</option>
+      <option value="es">ES</option>
+      <option value="pt">PT</option>
+      <option value="fr">FR</option>
+      <option value="fa">FA</option>
+      <option value="ar">AR</option>
+      <option value="zh">ZH</option>
+      <option value="ja">JA</option>
+      <option value="ko">KO</option>
+      <option value="it">IT</option>
+      <option value="hi">HI</option>
+      <option value="ru">RU</option>
+    </select>
+
+  </div>
+</header>
+
+
+<main>
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="stars"></div>
+
+    <div class="container">
+      <div class="hero-content">
+
+        <div class="badge">
+          🌍 Global Education & Science Platform
+        </div>
+
+        <h1>
+          Learn.<br>
+          Discover.<br>
+          <span class="gradient">Solve the Future.</span>
+        </h1>
+
+        <p>
+          Telescope Online — riyaziyyat, fizika, kimya, biologiya,
+          informatika və beynəlxalq təhsil proqramlarını bir platformada
+          birləşdirən qlobal təhsil və elm platforması.
+        </p>
+
+        <div class="buttons">
+          <a href="#subjects" class="btn btn-primary">
+            Dərslərə başla
+          </a>
+
+          <a href="#science" class="btn btn-secondary">
+            Global Science
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- SUBJECTS -->
+
+  <section id="subjects">
+
+    <div class="container">
+
+      <div class="section-title">
+        <h2>Əsas fənlər</h2>
+        <p>İlk sinifdən universitet səviyyəsinə qədər</p>
+      </div>
+
+      <div class="subjects">
+
+        <div class="subject">
+          <div class="subject-icon">📐</div>
+          <h3>Riyaziyyat</h3>
+          <p>Elementary → University</p>
+        </div>
+
+        <div class="subject">
+          <div class="subject-icon">⚛️</div>
+          <h3>Fizika</h3>
+          <p>School → Advanced</p>
+        </div>
+
+        <div class="subject">
+          <div class="subject-icon">🧪</div>
+          <h3>Kimya</h3>
+          <p>School → University</p>
+        </div>
+
+        <div class="subject">
+          <div class="subject-icon">🧬</div>
+          <h3>Biologiya</h3>
+          <p>School → Advanced</p>
+        </div>
+
+        <div class="subject">
+          <div class="subject-icon">💻</div>
+          <h3>İnformatika</h3>
+          <p>Programming & CS</p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- PROGRAMS -->
+
+  <section id="programs">
+
+    <div class="container">
+
+      <div class="section-title">
+        <h2>Beynəlxalq proqramlar</h2>
+        <p>Fərqli ölkələrin və beynəlxalq sistemlərin hazırlanması</p>
+      </div>
+
+      <div class="programs">
+
+        <div class="program">
+          <h3>🎓 IB</h3>
+          <p>International Baccalaureate hazırlıq proqramları.</p>
+        </div>
+
+        <div class="program">
+          <h3>📘 IGCSE</h3>
+          <p>Beynəlxalq orta məktəb proqramlarına hazırlıq.</p>
+        </div>
+
+        <div class="program">
+          <h3>📝 SAT</h3>
+          <p>Universitet qəbul imtahanına hazırlıq.</p>
+        </div>
+
+        <div class="program">
+          <h3>🌐 IELTS / TOEFL</h3>
+          <p>Beynəlxalq ingilis dili imtahanlarına hazırlıq.</p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- FEATURES -->
+
+  <section>
+
+    <div class="container">
+
+      <div class="section-title">
+        <h2>Telescope sistemləri</h2>
+        <p>Təhsil, qiymətləndirmə və elm bir platformada</p>
+      </div>
+
+      <div class="features">
+
+        <div class="feature">
+          <h3>📚 Video dərslər</h3>
+          <p>
+            Mövzular üzrə video dərslər və əlavə tədris materialları.
+          </p>
+        </div>
+
+        <div class="feature">
+          <h3>📝 Testlər</h3>
+          <p>
+            Mövzular üzrə izahlı suallar və 100 suallıq yoxlama testləri.
+          </p>
+        </div>
+
+        <div class="feature">
+          <h3>🏆 Olimpiada</h3>
+          <p>
+            Riyaziyyat, fizika, kimya və biologiya üzrə beynəlxalq yarışlar.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- GLOBAL SCIENCE -->
+
+  <section id="science" class="science">
+
+    <div class="container">
+
+      <div class="science-box">
+
+        <h2>🔬 Global Science</h2>
+
+        <p>
+          Dünyanın müxtəlif ölkələrindən alimlərin, tələbələrin və
+          tədqiqatçıların elmi problemləri müzakirə etməsi və yeni
+          ideyalar üzərində əməkdaşlıq etməsi üçün qlobal platforma.
+        </p>
+
+        <br>
+
+        <a href="#" class="btn btn-primary">
+          Elmi layihələr
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- OLYMPIAD -->
+
+  <section id="olympiad">
+
+    <div class="container">
+
+      <div class="section-title">
+        <h2>🏆 Telescope Olympiad</h2>
+
+        <p>
+          Riyaziyyat · Fizika · Kimya · Biologiya
+        </p>
+
+      </div>
+
+      <div style="text-align:center">
+
+        <a href="#" class="btn btn-primary">
+          Olimpiada haqqında
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<footer>
+
+  <div class="container">
+
+    <p>
+      © 2026 Telescope Online
+    </p>
+
+    <p>
+      Global Education & Science Platform
+    </p>
+
+  </div>
+
+</footer>
+
+
+<script>
+
+  const language = document.getElementById("language");
+
+  language.addEventListener("change", function () {
+
+    const selected = this.value;
+
+    if (selected === "ar" || selected === "fa") {
+
+      document.documentElement.dir = "rtl";
+
+    } else {
+
+      document.documentElement.dir = "ltr";
+
+    }
+
+    localStorage.setItem("telescope-language", selected);
+
+  });
+
+
+  const savedLanguage =
+    localStorage.getItem("telescope-language");
+
+  if (savedLanguage) {
+
+    language.value = savedLanguage;
+
+    if (savedLanguage === "ar" || savedLanguage === "fa") {
+
+      document.documentElement.dir = "rtl";
+
+    }
+
+  }
+
+</script>
+
+</body>
+</html>
+```
