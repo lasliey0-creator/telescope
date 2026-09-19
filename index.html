@@ -1,3 +1,10 @@
+
+      border: 1px solid #27365e;
+      border-radius: 22px;
+      padding: 50px;
+      background: rgba(8,13,32,.75);
+      text-align: center;
+    }
 ```html
 <!DOCTYPE html>
 <html lang="az">
@@ -282,13 +289,6 @@
     }
 
     .science-box {
-      border: 1px solid #27365e;
-      border-radius: 22px;
-      padding: 50px;
-      background: rgba(8,13,32,.75);
-      text-align: center;
-    }
-
     .science-box h2 {
       font-size: 40px;
       margin-bottom: 15px;
@@ -716,7 +716,535 @@
   }
 
 </script>
+<!-- ================================
+     TELESCOPE ONLINE AUTH SYSTEM
+================================ -->
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+  #telescope-auth {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.75);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    padding: 20px;
+  }
+
+  .telescope-auth-box {
+    width: 100%;
+    max-width: 430px;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.35);
+    color: #172033;
+    font-family: Arial, sans-serif;
+  }
+
+  .telescope-auth-box h2 {
+    margin-top: 0;
+    text-align: center;
+    color: #173b78;
+  }
+
+  .telescope-auth-box input,
+  .telescope-auth-box select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px;
+    margin: 7px 0;
+    border: 1px solid #ccd3df;
+    border-radius: 10px;
+    font-size: 15px;
+  }
+
+  .telescope-auth-btn {
+    width: 100%;
+    padding: 13px;
+    margin-top: 12px;
+    border: 0;
+    border-radius: 10px;
+    background: #1769e0;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .telescope-auth-btn:hover {
+    background: #0d55bd;
+  }
+
+  .telescope-auth-secondary {
+    background: #edf3ff;
+    color: #17468d;
+  }
+
+  #telescope-auth-message {
+    margin-top: 12px;
+    text-align: center;
+    font-size: 14px;
+  }
+
+  #telescope-user-panel {
+    display: none;
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    z-index: 99998;
+    background: white;
+    padding: 18px;
+    border-radius: 15px;
+    box-shadow: 0 10px 35px rgba(0,0,0,.2);
+    min-width: 230px;
+    font-family: Arial, sans-serif;
+  }
+
+  #telescope-user-panel strong {
+    color: #173b78;
+  }
+
+  .telescope-close {
+    float: right;
+    cursor: pointer;
+    font-size: 22px;
+  }
+</style>
+
+<!-- AUTH WINDOW -->
+<div id="telescope-auth">
+
+  <div class="telescope-auth-box">
+
+    <span class="telescope-close"
+          onclick="closeTelescopeAuth()">×</span>
+
+    <h2>🔭 TELESCOPE ONLINE</h2>
+
+    <div id="telescope-register-form">
+
+      <h3>Student Registration</h3>
+
+      <input
+        id="reg-first-name"
+        type="text"
+        placeholder="First name">
+
+      <input
+        id="reg-last-name"
+        type="text"
+        placeholder="Last name">
+
+      <input
+        id="reg-email"
+        type="email"
+        placeholder="Email address">
+
+      <input
+        id="reg-password"
+        type="password"
+        placeholder="Password">
+
+      <select id="reg-country">
+        <option value="">Select country</option>
+        <option>Azerbaijan</option>
+        <option>Türkiye</option>
+        <option>United Kingdom</option>
+        <option>United States</option>
+        <option>Germany</option>
+        <option>France</option>
+        <option>Spain</option>
+        <option>Portugal</option>
+        <option>Italy</option>
+        <option>Russia</option>
+        <option>China</option>
+        <option>Japan</option>
+        <option>South Korea</option>
+        <option>India</option>
+        <option>Iran</option>
+        <option>Other</option>
+      </select>
+
+      <select id="reg-language">
+        <option value="az">Azərbaycan</option>
+        <option value="en">English</option>
+        <option value="tr">Türkçe</option>
+        <option value="de">Deutsch</option>
+        <option value="es">Español</option>
+        <option value="pt">Português</option>
+        <option value="fr">Français</option>
+        <option value="fa">فارسی</option>
+        <option value="ar">العربية</option>
+        <option value="zh">中文</option>
+        <option value="ja">日本語</option>
+        <option value="ko">한국어</option>
+        <option value="it">Italiano</option>
+        <option value="hi">हिन्दी</option>
+        <option value="ru">Русский</option>
+      </select>
+
+      <select id="reg-grade">
+        <option value="">Select grade</option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+        <option>6</option>
+        <option>7</option>
+        <option>8</option>
+        <option>9</option>
+        <option>10</option>
+        <option>11</option>
+        <option>12</option>
+        <option>University</option>
+      </select>
+
+      <button class="telescope-auth-btn"
+              onclick="telescopeRegister()">
+        Create Account
+      </button>
+
+      <button class="telescope-auth-btn telescope-auth-secondary"
+              onclick="showTelescopeLogin()">
+        Already have an account? Login
+      </button>
+
+    </div>
+
+
+    <!-- LOGIN -->
+
+    <div id="telescope-login-form" style="display:none;">
+
+      <h3>Student Login</h3>
+
+      <input
+        id="login-email"
+        type="email"
+        placeholder="Email address">
+
+      <input
+        id="login-password"
+        type="password"
+        placeholder="Password">
+
+      <button class="telescope-auth-btn"
+              onclick="telescopeLogin()">
+        Login
+      </button>
+
+      <button class="telescope-auth-btn telescope-auth-secondary"
+              onclick="showTelescopeRegister()">
+        Create new account
+      </button>
+
+    </div>
+
+    <div id="telescope-auth-message"></div>
+
+  </div>
+</div>
+
+
+<!-- USER PANEL -->
+
+<div id="telescope-user-panel">
+
+  <strong>🔭 Telescope Student</strong>
+
+  <p id="telescope-user-email"></p>
+
+  <button class="telescope-auth-btn"
+          onclick="telescopeLogout()">
+    Logout
+  </button>
+
+</div>
+
+
+<script>
+
+const TELESCOPE_SUPABASE_URL =
+  "https://yrizozumgkqtiyazkybn.supabase.co";
+
+const TELESCOPE_SUPABASE_KEY =
+  Publishable key
+const telescopeSupabase =
+  window.supabase.createClient(
+    TELESCOPE_SUPABASE_URL,
+    TELESCOPE_SUPABASE_KEY
+  );
+
+
+function openTelescopeAuth() {
+  document.getElementById("telescope-auth").style.display = "flex";
+}
+
+
+function closeTelescopeAuth() {
+  document.getElementById("telescope-auth").style.display = "none";
+}
+
+
+function showTelescopeLogin() {
+
+  document.getElementById("telescope-register-form")
+    .style.display = "none";
+
+  document.getElementById("telescope-login-form")
+    .style.display = "block";
+
+  document.getElementById("telescope-auth-message")
+    .innerText = "";
+}
+
+
+function showTelescopeRegister() {
+
+  document.getElementById("telescope-register-form")
+    .style.display = "block";
+
+  document.getElementById("telescope-login-form")
+    .style.display = "none";
+
+  document.getElementById("telescope-auth-message")
+    .innerText = "";
+}
+
+
+async function telescopeRegister() {
+
+  const firstName =
+    document.getElementById("reg-first-name").value.trim();
+
+  const lastName =
+    document.getElementById("reg-last-name").value.trim();
+
+  const email =
+    document.getElementById("reg-email").value.trim();
+
+  const password =
+    document.getElementById("reg-password").value;
+
+  const country =
+    document.getElementById("reg-country").value;
+
+  const language =
+    document.getElementById("reg-language").value;
+
+  const grade =
+    document.getElementById("reg-grade").value;
+
+  const message =
+    document.getElementById("telescope-auth-message");
+
+
+  if (!firstName || !lastName || !email ||
+      !password || !country || !language || !grade) {
+
+    message.style.color = "red";
+    message.innerText =
+      "Please complete all fields.";
+
+    return;
+  }
+
+
+  if (password.length < 6) {
+
+    message.style.color = "red";
+    message.innerText =
+      "Password must contain at least 6 characters.";
+
+    return;
+  }
+
+
+  message.style.color = "#17468d";
+  message.innerText =
+    "Creating your account...";
+
+
+  const { data, error } =
+    await telescopeSupabase.auth.signUp({
+      email: email,
+      password: password,
+      options: {
+        data: {
+          first_name: firstName,
+          last_name: lastName,
+          country: country,
+          language: language,
+          grade: grade
+        }
+      }
+    });
+
+
+  if (error) {
+
+    message.style.color = "red";
+    message.innerText = error.message;
+
+    return;
+  }
+
+
+  if (data.user) {
+
+    const { error: profileError } =
+      await telescopeSupabase
+        .from("profiles")
+        .upsert({
+          id: data.user.id,
+          first_name: firstName,
+          last_name: lastName,
+          country: country,
+          language: language,
+          grade: grade,
+          role: "student"
+        });
+
+
+    if (profileError) {
+
+      console.error(profileError);
+
+      message.style.color = "red";
+      message.innerText =
+        "Account created, but profile could not be saved.";
+
+      return;
+    }
+  }
+
+
+  message.style.color = "green";
+  message.innerText =
+    "Account created successfully. Check your email if confirmation is required.";
+
+}
+
+
+async function telescopeLogin() {
+
+  const email =
+    document.getElementById("login-email").value.trim();
+
+  const password =
+    document.getElementById("login-password").value;
+
+  const message =
+    document.getElementById("telescope-auth-message");
+
+
+  if (!email || !password) {
+
+    message.style.color = "red";
+    message.innerText =
+      "Enter your email and password.";
+
+    return;
+  }
+
+
+  message.style.color = "#17468d";
+  message.innerText =
+    "Signing in...";
+
+
+  const { data, error } =
+    await telescopeSupabase.auth.signInWithPassword({
+      email: email,
+      password: password
+    });
+
+
+  if (error) {
+
+    message.style.color = "red";
+    message.innerText = error.message;
+
+    return;
+  }
+
+
+  message.style.color = "green";
+  message.innerText =
+    "Login successful!";
+
+
+  setTimeout(() => {
+
+    closeTelescopeAuth();
+
+    updateTelescopeUser(data.user);
+
+  }, 700);
+}
+
+
+async function telescopeLogout() {
+
+  await telescopeSupabase.auth.signOut();
+
+  document.getElementById(
+    "telescope-user-panel"
+  ).style.display = "none";
+
+  openTelescopeAuth();
+  showTelescopeLogin();
+}
+
+
+function updateTelescopeUser(user) {
+
+  if (!user) return;
+
+  document.getElementById(
+    "telescope-user-email"
+  ).innerText = user.email;
+
+  document.getElementById(
+    "telescope-user-panel"
+  ).style.display = "block";
+}
+
+
+async function telescopeCheckSession() {
+
+  const {
+    data: { session }
+  } = await telescopeSupabase.auth.getSession();
+
+  if (session && session.user) {
+
+    updateTelescopeUser(session.user);
+
+  }
+}
+
+
+telescopeSupabase.auth.onAuthStateChange(
+  (event, session) => {
+
+    if (session && session.user) {
+
+      updateTelescopeUser(session.user);
+
+    }
+
+  }
+);
+
+
+telescopeCheckSession();
+
+</script>
 </body>
 </html>
 ```
